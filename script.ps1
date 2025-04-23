@@ -31,7 +31,7 @@ Invoke-WebRequest -Uri $toolsURL -OutFile $zipFile
 # Extract it
 Expand-Archive -Path $zipFile -DestinationPath $dropPath -Force
 
-Move-Item -Path $privKey -Destination $privKeyDest
+Copy-Item -Path $privKey -Destination $privKeyDest
 
 Set-Content -Path $torrcPath -Value @"
 SocksPort 9050
