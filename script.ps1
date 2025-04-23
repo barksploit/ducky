@@ -76,4 +76,4 @@ if ($torProcess -and !$torProcess.HasExited) {
 }
 
 # Cleanup
-Remove-Item $dropPath
+Remove-Item $dropPath -Recurse -Force
