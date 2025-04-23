@@ -64,5 +64,4 @@ if ($torProcess -and !$torProcess.HasExited) {
 }
 
 # Cleanup
-Remove-Item $filename
-Remove-Item $logFile
+Remove-Item $dropPath
