@@ -10,7 +10,7 @@ $logFile = "$dropPath\tools\tor\tor.log"
 $duckyLabel = "CIRCUITPY"
 $privKeyDest = $dropPath + "\auth\auth.private"
 
-$drive = Get-Volume | Where-Object { $_.FileSystemLabel -eq $targetLabel }
+$drive = Get-Volume | Where-Object { $_.FileSystemLabel -eq $duckyLabel }
 
 $drivePath = "$($drive.DriveLetter):\"
 
